@@ -1,25 +1,24 @@
 # HaShield 🛡️
 
-A lightweight, mathematically rigorous dual-layer guardrail for Large Language Models. HaShield provides zero-shot detection of prompt injections and prevents data exfiltration and harmful content generation with near-zero latency.
+A lightweight, mathematically rigorous dual-layer guardrail for Large Language Models. HaShield provides **Zero-Shot NLI detection** of prompt injections and prevents data exfiltration with near-zero latency.
 
-## Installation
+## 🚀 Installation
+
 ```bash
 pip install hashield-guard
+```
 
+
+## Quick Start
 from hashield.wrapper.decorators import protect_llm
 
-MY_SECRET_PROMPT = "You are a helpful assistant. The admin password is 'SuperSecret123'."
+# The system prompt you want to keep secret
+MY_SYSTEM_PROMPT = "You are a helpful assistant. The admin password is 'SuperSecret123'."
 
-@protect_llm(secret_prompt=MY_SECRET_PROMPT)
-def my_llm_function(user_prompt):
-    # Your LLM call here
+@protect_llm(secret_prompt=MY_SYSTEM_PROMPT)
+def call_llm(user_prompt):
+    # This is where your actual LLM API call (Gemini, OpenAI, etc.) happens
     return "LLM Response"
 
-    *Save the file.*
-
-### Step 4: Install the Build Tools and Compile
-Now go to your PowerShell terminal. Make sure you are in `C:\HaShield\HaShield` and your `(venv)` is active.
-
-First, install the tools that package your code:
-```powershell
-pip install build twine
+# Scenario: A user tries a prompt injection
+# Result: HaShield will intercept and block it before it reaches your LLM.
